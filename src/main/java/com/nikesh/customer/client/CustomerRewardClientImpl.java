@@ -22,12 +22,13 @@ public class CustomerRewardClientImpl implements CustomerRewardClient{
 		LOG.info("getting reward points for the customer::"+customerTransactionData.getCustomerId());
 		double customerDataAmount = customerTransactionData.getAmount();
 		int aboveFiftyPoints=0, aboveHundreadPoints = 0, totalPoints = 0;
-		aboveFiftyPoints = (int) (customerDataAmount - 50);
-		if(customerDataAmount> 100){
+		if(customerDataAmount>50){
 			aboveFiftyPoints = (int) (customerDataAmount - 50);
-			aboveHundreadPoints = (int) ((customerDataAmount-100)*2);
-		}
-				
+			if(customerDataAmount> 100){
+				aboveFiftyPoints = (int) (customerDataAmount - 50);
+				aboveHundreadPoints = (int) ((customerDataAmount-100)*2);
+			}
+		}		
 		totalPoints = aboveHundreadPoints+aboveFiftyPoints;		
 		TransactionDetails customerTransaction = new TransactionDetails();
 		customerTransaction.setAmount(customerDataAmount);
